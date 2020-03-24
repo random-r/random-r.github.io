@@ -13075,28 +13075,6 @@ div#notebook {
     <div class="container" id="notebook-container">
 
 <div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[285]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span> 
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">seaborn</span> <span class="kn">as</span> <span class="nn">sns</span> 
-<span class="kn">import</span> <span class="nn">datetime</span>
-<span class="kn">from</span> <span class="nn">plotly.offline</span> <span class="kn">import</span> <span class="n">download_plotlyjs</span><span class="p">,</span> <span class="n">init_notebook_mode</span><span class="p">,</span> <span class="n">plot</span><span class="p">,</span> <span class="n">iplot</span>
-<span class="kn">from</span> <span class="nn">plotly.graph_objs</span> <span class="kn">import</span> <span class="n">Scatter</span><span class="p">,</span> <span class="n">Figure</span><span class="p">,</span> <span class="n">Layout</span>
-<span class="kn">import</span> <span class="nn">plotly</span>
-<span class="kn">import</span> <span class="nn">plotly.graph_objs</span> <span class="kn">as</span> <span class="nn">go</span>
-<span class="kn">import</span> <span class="nn">plotly.express</span> <span class="kn">as</span> <span class="nn">px</span>
-<span class="n">init_notebook_mode</span><span class="p">(</span><span class="n">connected</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
-<span class="kn">import</span> <span class="nn">io</span>
-<span class="kn">import</span> <span class="nn">requests</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
 
 <div class="output_wrapper">
 <div class="output">
@@ -13152,38 +13130,9 @@ div#notebook {
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[286]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-regioni/dpc-covid19-ita-regioni.csv&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">content</span>
-<span class="n">dat</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">StringIO</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)))</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[342]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">dat</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;stato&#39;</span><span class="p">,</span><span class="s1">&#39;codice_regione&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">,</span><span class="s1">&#39;Region&#39;</span><span class="p">,</span><span class="s1">&#39;Lat&#39;</span><span class="p">,</span><span class="s1">&#39;Long&#39;</span><span class="p">,</span><span class="s1">&#39;HospWSymptoms&#39;</span><span class="p">,</span><span class="s1">&#39;IC&#39;</span><span class="p">,</span><span class="s1">&#39;TotalHosp&#39;</span><span class="p">,</span><span class="s1">&#39;Home&#39;</span><span class="p">,</span><span class="s1">&#39;TotalCurPositive&#39;</span><span class="p">,</span><span class="s1">&#39;NewPositive&#39;</span><span class="p">,</span><span class="s1">&#39;Recovered&#39;</span><span class="p">,</span> <span class="s1">&#39;Deaths&#39;</span><span class="p">,</span><span class="s1">&#39;TotalCases&#39;</span><span class="p">,</span><span class="s1">&#39;Tests&#39;</span><span class="p">]</span>
-
-<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">date</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Date&quot;</span><span class="p">])</span>
-<span class="n">df</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
-
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Originaalandmetabeli päis&quot;</span><span class="p">)</span>
-<span class="n">dat</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
 
 <div class="output_wrapper">
 <div class="output">
@@ -13313,17 +13262,6 @@ div#notebook {
 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[320]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;Nimetame ümber, lühemaks ja arusaadavamaks. Uute tunnustenimedega andmetabel&quot;</span><span class="p">)</span>
-<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
 
 <div class="output_wrapper">
 <div class="output">
@@ -13488,18 +13426,6 @@ div#notebook {
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[343]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="n">df2</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-<span class="n">df_sum</span> <span class="o">=</span> <span class="n">df2</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;Lat&#39;</span><span class="p">,</span><span class="s1">&#39;Long&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">Date</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
-<span class="n">df_sum</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
 
 <div class="output_wrapper">
 <div class="output">
@@ -13962,20 +13888,6 @@ div#notebook {
 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[345]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="n">df_sum2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">melt</span><span class="p">(</span><span class="n">df_sum</span><span class="p">,</span> <span class="n">id_vars</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">],</span> <span class="n">value_vars</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;NewPositive&#39;</span><span class="p">,</span><span class="s1">&#39;Recovered&#39;</span><span class="p">,</span><span class="s1">&#39;Deaths&#39;</span><span class="p">])</span>
-
-<span class="n">fig</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">df_sum2</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;Date&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;value&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;variable&#39;</span><span class="p">,</span> <span class="n">hover_name</span><span class="o">=</span><span class="s2">&quot;value&quot;</span><span class="p">,</span> <span class="n">render_mode</span><span class="o">=</span><span class="s2">&quot;svg&quot;</span><span class="p">,</span> <span class="n">log_y</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Päevas lisanduvad positiivsed + kumulatiivne taastunute, surmade arv&quot;</span><span class="p">)</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
 
 <div class="output_wrapper">
 <div class="output">
@@ -14047,28 +13959,6 @@ if (outputEl) {{
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[290]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="kn">import</span> <span class="nn">folium</span>
-<span class="kn">from</span> <span class="nn">folium.plugins</span> <span class="kn">import</span> <span class="n">HeatMap</span>
-<span class="k">def</span> <span class="nf">generateBaseMap</span><span class="p">(</span><span class="n">default_location</span><span class="o">=</span><span class="p">[</span><span class="mi">43</span><span class="p">,</span> <span class="mi">13</span><span class="p">],</span> <span class="n">default_zoom_start</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
-    <span class="n">base_map</span> <span class="o">=</span> <span class="n">folium</span><span class="o">.</span><span class="n">Map</span><span class="p">(</span><span class="n">location</span><span class="o">=</span><span class="n">default_location</span><span class="p">,</span> <span class="n">control_scale</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">zoom_start</span><span class="o">=</span><span class="n">default_zoom_start</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">base_map</span>
-
-<span class="n">f</span> <span class="o">=</span> <span class="n">folium</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">800</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">450</span><span class="p">)</span>
-<span class="n">base_map</span> <span class="o">=</span> <span class="n">generateBaseMap</span><span class="p">()</span><span class="o">.</span><span class="n">add_to</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-<span class="n">map1</span> <span class="o">=</span> <span class="n">df2</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;2020-03-1&#39;</span><span class="p">:</span><span class="s1">&#39;2020-03-07&#39;</span><span class="p">]</span>
-<span class="n">vars1</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Lat&#39;</span><span class="p">,</span> <span class="s1">&#39;Long&#39;</span><span class="p">,</span> <span class="s1">&#39;Deaths&#39;</span><span class="p">]</span>
-<span class="n">HeatMap</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">map1</span><span class="p">[</span><span class="n">vars1</span><span class="p">]</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;Lat&#39;</span><span class="p">,</span> <span class="s1">&#39;Long&#39;</span><span class="p">,])</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> <span class="n">radius</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">max_zoom</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span><span class="o">.</span><span class="n">add_to</span><span class="p">(</span><span class="n">base_map</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;1-7. märts&quot;</span><span class="p">)</span>
-<span class="n">base_map</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
 
 <div class="output_wrapper">
 <div class="output">
@@ -14102,19 +13992,6 @@ if (outputEl) {{
 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[291]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="n">map2</span> <span class="o">=</span> <span class="n">df2</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;2020-03-8&#39;</span><span class="p">:</span><span class="s1">&#39;2020-03-15&#39;</span><span class="p">]</span>
-<span class="n">HeatMap</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">map2</span><span class="p">[</span><span class="n">vars1</span><span class="p">]</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;Lat&#39;</span><span class="p">,</span> <span class="s1">&#39;Long&#39;</span><span class="p">,])</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> <span class="n">radius</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">max_zoom</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span><span class="o">.</span><span class="n">add_to</span><span class="p">(</span><span class="n">base_map</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;8-15. märts&quot;</span><span class="p">)</span>
-<span class="n">base_map</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
 
 <div class="output_wrapper">
 <div class="output">
@@ -14148,19 +14025,6 @@ if (outputEl) {{
 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[292]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="n">map3</span> <span class="o">=</span> <span class="n">df2</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;2020-03-16&#39;</span><span class="p">:</span><span class="s1">&#39;2020-03-23&#39;</span><span class="p">]</span>
-<span class="n">HeatMap</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">map3</span><span class="p">[</span><span class="n">vars1</span><span class="p">]</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;Lat&#39;</span><span class="p">,</span> <span class="s1">&#39;Long&#39;</span><span class="p">,])</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> <span class="n">radius</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">max_zoom</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span><span class="o">.</span><span class="n">add_to</span><span class="p">(</span><span class="n">base_map</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&quot;16-23. märts&quot;</span><span class="p">)</span>
-<span class="n">base_map</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
 
 <div class="output_wrapper">
 <div class="output">
@@ -14194,31 +14058,9 @@ if (outputEl) {{
 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span>
-</pre></div>
-
-    </div>
-</div>
-</div>
 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[326]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="c1"># cmap = sns.cubehelix_palette(n_colors=30, rot=-.2, as_cmap=True)</span>
-<span class="c1"># plt.figure(figsize=(14, 7))</span>
-<span class="c1"># fig = sns.scatterplot(x=&quot;NewPositive&quot;, y=&quot;Deaths&quot;, hue=&quot;Tests&quot;, size=&quot;TotalCurPositive&quot;, palette=cmap, sizes=(10, 200), data=df_sum)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
@@ -14229,19 +14071,6 @@ if (outputEl) {{
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[340]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df2</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;TotalCases&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Deaths&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;Region&quot;</span><span class="p">,</span> <span class="n">hover_name</span><span class="o">=</span><span class="s2">&quot;Region&quot;</span><span class="p">,</span>
-        <span class="n">render_mode</span><span class="o">=</span><span class="s2">&quot;svg&quot;</span><span class="p">,</span> <span class="n">log_x</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">log_y</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Surmade arv vs kokku juhtumite arv regioonides&quot;</span><span class="p">)</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
 
 <div class="output_wrapper">
 <div class="output">
@@ -14306,19 +14135,6 @@ if (outputEl) {{
 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[339]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df2</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;Tests&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Deaths&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;Region&quot;</span><span class="p">,</span> <span class="n">hover_name</span><span class="o">=</span><span class="s2">&quot;Region&quot;</span><span class="p">,</span>
-        <span class="n">render_mode</span><span class="o">=</span><span class="s2">&quot;svg&quot;</span><span class="p">,</span> <span class="n">log_x</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">log_y</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Surmade arv vs testide arv regiooniti&quot;</span><span class="p">)</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
 
 <div class="output_wrapper">
 <div class="output">
@@ -14383,19 +14199,6 @@ if (outputEl) {{
 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[338]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">df2</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;Date&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Deaths&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;Region&quot;</span><span class="p">,</span> <span class="n">hover_name</span><span class="o">=</span><span class="s2">&quot;Region&quot;</span><span class="p">,</span>
-        <span class="n">render_mode</span><span class="o">=</span><span class="s2">&quot;svg&quot;</span><span class="p">,</span> <span class="n">log_y</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Surmade kumulatiivarv regiooniti&quot;</span><span class="p">)</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
 
 <div class="output_wrapper">
 <div class="output">
@@ -14460,19 +14263,6 @@ if (outputEl) {{
 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[336]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="n">df2</span><span class="p">[</span><span class="s1">&#39;deaths_per_totalcases&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df2</span><span class="p">[</span><span class="s1">&#39;Deaths&#39;</span><span class="p">]</span><span class="o">/</span><span class="n">df2</span><span class="p">[</span><span class="s1">&#39;TotalCases&#39;</span><span class="p">])</span>
-<span class="n">fig</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">df2</span><span class="p">[</span><span class="n">df2</span><span class="p">[</span><span class="s1">&#39;Region&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s1">&#39;Lombardia&#39;</span><span class="p">,</span><span class="s1">&#39;Veneto&#39;</span><span class="p">,</span><span class="s1">&#39;Emilia Romagna&#39;</span><span class="p">,</span><span class="s1">&#39;Piemonte&#39;</span><span class="p">,</span><span class="s1">&#39;Liguria&#39;</span><span class="p">])],</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;Date&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;deaths_per_totalcases&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;Region&quot;</span><span class="p">,</span> <span class="n">hover_name</span><span class="o">=</span><span class="s2">&quot;Region&quot;</span><span class="p">,</span> <span class="n">render_mode</span><span class="o">=</span><span class="s2">&quot;svg&quot;</span><span class="p">)</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Deaths per TotalCases&quot;</span><span class="p">)</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
 
 <div class="output_wrapper">
 <div class="output">
@@ -14537,19 +14327,6 @@ if (outputEl) {{
 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[333]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="n">df2</span><span class="p">[</span><span class="s1">&#39;recovery_per_totalcases&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df2</span><span class="p">[</span><span class="s1">&#39;Recovered&#39;</span><span class="p">]</span><span class="o">/</span><span class="n">df2</span><span class="p">[</span><span class="s1">&#39;TotalCases&#39;</span><span class="p">])</span>
-<span class="n">fig</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">df2</span><span class="p">[</span><span class="n">df2</span><span class="p">[</span><span class="s1">&#39;Region&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s1">&#39;Lombardia&#39;</span><span class="p">,</span><span class="s1">&#39;Veneto&#39;</span><span class="p">,</span><span class="s1">&#39;Emilia Romagna&#39;</span><span class="p">,</span><span class="s1">&#39;Piemonte&#39;</span><span class="p">,</span><span class="s1">&#39;Liguria&#39;</span><span class="p">])],</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;Date&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;recovery_per_totalcases&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;Region&quot;</span><span class="p">,</span> <span class="n">hover_name</span><span class="o">=</span><span class="s2">&quot;Region&quot;</span><span class="p">,</span> <span class="n">render_mode</span><span class="o">=</span><span class="s2">&quot;svg&quot;</span><span class="p">,</span> <span class="n">line_shape</span><span class="o">=</span><span class="s1">&#39;spline&#39;</span><span class="p">)</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Recovered per TotalCases&quot;</span><span class="p">)</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
 
 <div class="output_wrapper">
 <div class="output">
@@ -14614,16 +14391,6 @@ if (outputEl) {{
 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span>
-</pre></div>
-
-    </div>
-</div>
-</div>
 
 </div>
     </div>
